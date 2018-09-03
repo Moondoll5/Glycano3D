@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <meta charset="utf-8">
+    <meta author="Imaan Dolley">
+    <title>Glycano 3D</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous">
+    </script>
+
+    <script type="text/javascript" src="~/Scripts/JSmol.min.js"></script>
+
+
+</head>
+<body>
+    <h1>Glycano 3D</h1>
+      <h6>@ViewBag.SessionId</h6>
+
+    <script type="text/javascript">
+        //Prevents X-Frame-Options Error
+        delete Jmol._tracker;
+
+        //Jmol._debugCode = (xxxx.indexOf("debugcode") >= 0);
+
+        //Creates the applet and its border.
+        jmol_isReady = function (applet) {
+            Jmol._getElement(applet, "appletdiv").style.border = "1px solid pink"
+
+        }
+
+        //Creates a script which loads the initial default PDB file.
+        var xxxx = "";
+        if (xxxx.length == 5 || xxxx.length == 0) {
+            xxxx = (xxxx + "?1crn").substring(1, 5)
+            script = 'h2oOn=true;set animframecallback "jmolscript:if (!selectionHalos) {select model=_modelNumber}";'
+                + 'set errorCallback "myCallback";'
+                + 'set defaultloadscript "isDssp = false;set defaultVDW babel;if(!h2oOn){display !water}";'
+                + 'set zoomlarge false;set echo top left;echo loading...;refresh;'
+                + 'load "http://www.rcsb.org/pdb/files/XXXX.pdb";set echo top center;echo XXXX;'
+                + 'spacefill off;wireframe off;cartoons on;color structure;'
+            script = script.replace(/XXXX/g, xxxx)
+        } else {
+            script = unescape(xxxx.substring(1))
+        }
+        //Gives the JSmol specifications
+        var InfoVar = {
+            width: 450,
+            height: 450,
+            debug: false,
+            color: "white",
+            addSelectionOptions: false,
+            serverURL: "www.chemapps.stolaf.edu/jmol/jsmol/php/jsmol.php",
+            //serverURL: "https://jsmol3d.firebaseapp.com/",
+            use: "HTML5",
+            jarPath: "~/Scripts/java",
+            j2sPath: "~/Scripts/j2s",
+            jarFile: "~/Scripts/java/JmolAppletSigned0.jar",
+            isSigned: true,
+            readyFunction: jmol_isReady,
+            script: script,
+            disableInitialConsole: true
+        }
+
+        //Functions for the JSmol buttons on the HTML
+        function jmolCheckbox(script1, script0, text, ischecked) { Jmol.jmolCheckbox(window.jmolApplet0, script1, script0, text, ischecked) }
+        function jmolButton(script, text) { Jmol.jmolButton(window.jmolApplet0, script, text) }
+        function jmolHtml(s) { document.write(s) };
+        function jmolBr() { jmolHtml("<br>") }
+        function jmolMenu(a) { Jmol.jmolMenu(window.jmolApplet0, a) }
+
+    </script>
+
+
+    <!-- Form with text field to input arguments to CarbBuilder -->
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+    <form method="POST">
+            <label for="args">Arguments: </label>
+            <input name="args" id="args" type="text">
+            <button id="submitButton" type="submit">Submit</button>
+        </form>
+    }
+
+    @*<script>
+        $('#submitButton').click(function (event) {
+            event.preventDefault();
+            //Args example: -i ->2)aLRha(1->2)aLRha(1->3)aLRha(1->3)bDGlcNAc(1-> -r 6
+            //var url = '@Url.Action("Post", "Home")?args=' + $('#args').val();
+            //console.log(url);
+            var args = $('#args').val();
+            var data = { args: args };
+           
+            $.ajax({
+                url: "Home/Post/" + args,
+                type: "POST",
+              //  data: JSON.stringify(data),
+                data: args,
+                //contentType: 'application/json; charset:utf-8;',
+                success: function (data) {
+                    //Takes the given session ID filename received from the server
+                    //Adds the PDB extension to the filename.
+                    //window.xxxx = data + ".pdb";
+                    alert(data);*@
+                    //window.xxxx = "~/Data/newMaltose.pdb";
+                    ////alert(data);
+
+                    ////Updates the JSmol script to reload the applet with the new Molecule File.
+                    //window.script = 'h2oOn=true;set animframecallback "jmolscript:if (!selectionHalos) {select model=_modelNumber}";'
+                    //    + 'set errorCallback "myCallback";'
+                    //    + 'set defaultloadscript "isDssp = false;set defaultVDW babel;if(!h2oOn){display !water}";'
+                    //    + 'set zoomlarge false;set echo top left;echo loading...;refresh;'
+                    //    + 'load XXXX;set echo top center;echo XXXX;'
+                    //    + 'spacefill off;wireframe off;cartoons on;color structure;';
+                    //window.script = window.script.replace(/XXXX/g, window.xxxx);
+                    //window.InfoVar.script = window.script;
+
+                    ////	Jmol.script(applet, "load newMaltose.pdb");
+                    ////Jmol._loadFileAsynchronously(null, window.jmolApplet0, null, null);
+
+                    ////Changes the molecule displayed in the applet.
+                    //Jmol.script(jmolApplet0, window.script);
+                },
+                error: function (XHR, text, errorThrown) {
+                    //Throws an error if the post doesn't work
+                    alert("Error: Data could not be retrieved.");
+                }
+            });
+
+        });
+    @*</script>
+    <script type="text/javascript">
+        var jmolApplet0 = Jmol.getApplet("jmolApplet0", InfoVar);
+    </script>*@
+
+    <!-- <nav class="navbar navbar-dark bg-dark">
+      <form class="form-inline">
+        <button class="btn btn-outline-success" type="button" onclick= "jmolButton('color cpk')">Colour by Element</button>
+        <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('color group')">Colour by Group</button>
+        <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('color amino')">Colour by Amino</button>
+        <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('color structure')">Colour by Structure</button>
+        <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('trace only')">Trace</button>
+        <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('cartoon only')">Cartoon</button>
+        <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('backbone only')">Backbone</button>
+        <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('spacefill only;spacefill 23%;wireframe 0.15,ball&stick')">Ball and Stick</button>
+      </form>
+    </nav> -->
+
+    @*<form>
+        <script type="text/javascript">
+            // jmolButton("load ?","Load URL")
+            // jmolBr()
+            jmolCheckbox("set pdbAddHydrogens TRUE", "set pdbAddHydrogens FALSE", "with hydrogens", false)
+            jmolBr()
+            jmolButton("load ?", "Load FILE")
+            jmolBr()
+            jmolButton("write FILE ?", "Save FILE")
+            jmolBr()
+            jmolButton("write image jsmol.jpg", "Save JPG")
+            jmolBr()
+            jmolButton("write image jsmol.png", "Save PNG")
+            jmolBr()
+        </script>
+    </form>
+
+    <script type="text/javascript">
+        jmolBr()
+        jmolButton("color cpk")
+        jmolButton("color group")
+        jmolButton("color amino")
+        jmolButton("color structure")
+        jmolBr()
+        jmolButton("trace only")
+        jmolButton("cartoon only")
+        jmolButton("backbone only")
+        jmolButton("spacefill only;spacefill 23%;wireframe 0.15", "ball&stick")
+        jmolBr()
+                // Jmol.setButtonCss(null,"style='width:160px'")
+                // jmolButton("Ramachandran relative")
+                // jmolButton("Quaternion difference")
+                // jmolBr()
+    </script>*@
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+START "" /d C:\Users\naziedoll\Documents\Honours\FirebaseWeb\public\files\jsmol\CBv2.1.25 /wait CarbBuilder2.exe -i  "->2)aLRha(1->2)aLRha(1->3)aLRha(1->3)bDGlcNAc(1->" -r 6 -o output pause
