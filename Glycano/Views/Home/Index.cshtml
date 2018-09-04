@@ -89,6 +89,7 @@
     <script>
         $('#submitButton').click(function (event) {
             event.preventDefault();
+            //-i ->2)aLRha(1->2)aLRha(1->3)aLRha(1->3)bDGlcNAc(1-> -r 6
             var args = $('#args').val();
             var data = { Value: args };
 
@@ -100,10 +101,9 @@
                 success: function (data) {
                     //Takes the given session ID filename received from the server
                     //Adds the PDB extension to the filename.
-                    //window.xxxx = data + ".pdb";
+                   // window.xxxx = data + ".pdb";
                     alert(data);
                     //window.xxxx = "~/Data/newMaltose.pdb";
-                    ////alert(data);
 
                     ////Updates the JSmol script to reload the applet with the new Molecule File.
                     //window.script = 'h2oOn=true;set animframecallback "jmolscript:if (!selectionHalos) {select model=_modelNumber}";'

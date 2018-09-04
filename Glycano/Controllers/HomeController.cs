@@ -24,10 +24,22 @@ namespace Glycano.Controllers
         [HttpPost]
         public JsonResult GetValue(Data data)
         {
+            //To run CarbBuilder
+            //Gives path to CarbBuilder and arguments before running it.
             ProcessStartInfo start = new ProcessStartInfo();
-            start.FileName = "C:/Users/dllima001/source/repos/Gly/Glycano/Scripts/CarbBuilder/CarbBuilder2.exe";
-            start.WindowStyle = ProcessWindowStyle.Hidden;
-            start.CreateNoWindow = true;
+            start.FileName = Server.MapPath("~/Scripts/CarbBuilder/CarbBuilder2.exe");
+           // start.UseShellExecute = false;
+            start.ErrorDialog = true;
+
+            //Gets sessionID unique to current browser.
+            string sessionId = System.Web.HttpContext.Current.Session.SessionID;
+            Data session = new Data();
+            session.Value = sessionId;
+
+            start.Arguments = data.Value + " -o " + sessionId;
+            Console.WriteLine("heeeeey " + start.Arguments);
+            //start.WindowStyle = ProcessWindowStyle.Hidden;
+            //start.CreateNoWindow = true;
             int exitCode;
 
             using (Process proc = Process.Start(start))
@@ -36,10 +48,10 @@ namespace Glycano.Controllers
                 exitCode = proc.ExitCode;
             }
 
-            string sessionId = System.Web.HttpContext.Current.Session.SessionID;
-            //  return Json(data.Value, JsonRequestBehavior.AllowGet);
-            Data session = new Data();
-            session.Value = sessionId;
+            
+
+            //Sends sessionID to client
+            //SessionID is used as filename for PDB files.
             return Json(session.Value, JsonRequestBehavior.AllowGet);
         }
     }
