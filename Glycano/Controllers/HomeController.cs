@@ -7,6 +7,12 @@ using System.Web.Mvc;
 
 namespace Glycano.Controllers
 {
+    public class Data
+    {
+        public string Value { get; set; }
+    }
+
+
     public class HomeController : Controller
     {
 
@@ -15,31 +21,44 @@ namespace Glycano.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Post(FormCollection form)
-        {
-            // Prepare the process to run
-            ProcessStartInfo start = new ProcessStartInfo();
-            // Enter in the command line arguments, everything you would enter after the executable name itself
-            start.Arguments = form["args"];
-            Console.WriteLine(start.Arguments);
-            // Enter the executable to run, including the complete path
-            start.FileName = "C:/Users/User/source/repos/Glycano/Glycano/Scripts/CarbBuilder/CarbBuilder2.exe";
-            // Do you want to show a console window?
-            start.WindowStyle = ProcessWindowStyle.Hidden;
-            start.CreateNoWindow = true;
-            
-            int exitCode;
+        //[HttpPost]
+        //public ActionResult Post(FormCollection form)
+        //{
+        // Prepare the process to run
+        ProcessStartInfo start = new ProcessStartInfo();
+       
 
-            using (Process proc = Process.Start(start))
-            {
-                proc.WaitForExit();
-                exitCode = proc.ExitCode;
-            }
-            
-            //var arguments = form["args"];
-            //ViewBag.SessionId = arguments;
-            return View();
+//    //var arguments = form["args"];
+//    //ViewBag.SessionId = arguments;
+//    return View();
+//}
+
+[HttpPost]
+        public JsonResult GetValue(Data data)
+        {
+            //Console.WriteLine(start.Arguments);
+            //start.FileName = "C:/Users/User/source/repos/Glycano/Glycano/Scripts/CarbBuilder/CarbBuilder2.exe";
+            //start.WindowStyle = ProcessWindowStyle.Hidden;
+            //start.CreateNoWindow = true;
+            //int exitCode;
+
+            //using (Process proc = Process.Start(start))
+            //{
+            //    proc.WaitForExit();
+            //    exitCode = proc.ExitCode;
+            //}
+
+            //using (Process proc = Process.Start(start))
+            //{
+            //    proc.WaitForExit();
+            //    exitCode = proc.ExitCode;
+            //}
+
+            //string sessionId = System.Web.HttpContext.Current.Session.SessionID;
+            return Json(data.Value, JsonRequestBehavior.AllowGet);
+            //Data session = new Data();
+            //session.Arguments = sessionId;
+            //return Json(sessionId, JsonRequestBehavior.AllowGet);
         }
     }
 }
