@@ -18,17 +18,6 @@ namespace Glycano
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-
-            //routes.MapRoute(
-            //    name: "Arguments",
-            //    url: "{controller}/{action}/{id}",
-            //    defaults: new { controller = "Home", action = "Post", id = "Args" }
-            //);
         }
-
-        //protected void Application_Start()
-        //{
-        //    RegisterRoutes(RouteTable.Routes);
-        //}
     }
 }
