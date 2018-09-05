@@ -22,7 +22,6 @@
 </head>
 <body>
     <h1>Glycano 3D</h1>
-    @*<h6>@ViewBag.SessionId</h6>*@
 
     <script type="text/javascript">
         //Prevents X-Frame-Options Error
@@ -81,9 +80,9 @@
 
     <!-- Form with text field to input arguments to CarbBuilder -->
     <form method="POST">
-            <label for="args">Arguments: </label>
-            <input name="args" id="args" type="text">
-            <button id="submitButton" type="submit">Submit</button>
+        <label for="args">Arguments: </label>
+        <input name="args" id="args" type="text">
+        <button id="submitButton" type="submit">Submit</button>
     </form>
 
     <script>
@@ -101,7 +100,7 @@
                 success: function (data) {
                     //Takes the given session ID filename received from the server
                     //Adds the PDB extension to the filename.
-                   // window.xxxx = data + ".pdb";
+                    // window.xxxx = data + ".pdb";
                     alert(data);
                     //window.xxxx = "~/Data/newMaltose.pdb";
 
@@ -114,9 +113,6 @@
                     //    + 'spacefill off;wireframe off;cartoons on;color structure;';
                     //window.script = window.script.replace(/XXXX/g, window.xxxx);
                     //window.InfoVar.script = window.script;
-
-                    ////	Jmol.script(applet, "load newMaltose.pdb");
-                    ////Jmol._loadFileAsynchronously(null, window.jmolApplet0, null, null);
 
                     ////Changes the molecule displayed in the applet.
                     //Jmol.script(jmolApplet0, window.script);
@@ -131,7 +127,20 @@
     </script>
     <script type="text/javascript">
         var jmolApplet0 = Jmol.getApplet("jmolApplet0", InfoVar);
+
+     //   Jmol.setButtonCss(null, "style='width:160px'");
+     //   $("#rightpanel").html(
+     //       jmolButton("load ?", "Load FILE")
+    
+	    //);
     </script>
+
+    <table style="margin-left:auto; margin-right:auto;">
+        <tr>
+            <td><div id="leftpanel"></div></td>
+            <td><div id="rightpanel"></div></td>
+        </tr>
+    </table>
 
     <!-- <nav class="navbar navbar-dark bg-dark">
       <form class="form-inline">
@@ -145,41 +154,40 @@
         <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('spacefill only;spacefill 23%;wireframe 0.15,ball&stick')">Ball and Stick</button>
       </form>
     </nav> -->
-
     @*<form>
-        <script type="text/javascript">
-            // jmolButton("load ?","Load URL")
-            // jmolBr()
-            jmolCheckbox("set pdbAddHydrogens TRUE", "set pdbAddHydrogens FALSE", "with hydrogens", false)
-            jmolBr()
-            jmolButton("load ?", "Load FILE")
-            jmolBr()
-            jmolButton("write FILE ?", "Save FILE")
-            jmolBr()
-            jmolButton("write image jsmol.jpg", "Save JPG")
-            jmolBr()
-            jmolButton("write image jsmol.png", "Save PNG")
-            jmolBr()
-        </script>
-    </form>
-
-    <script type="text/javascript">
-        jmolBr()
-        jmolButton("color cpk")
-        jmolButton("color group")
-        jmolButton("color amino")
-        jmolButton("color structure")
-        jmolBr()
-        jmolButton("trace only")
-        jmolButton("cartoon only")
-        jmolButton("backbone only")
-        jmolButton("spacefill only;spacefill 23%;wireframe 0.15", "ball&stick")
-        jmolBr()
-                // Jmol.setButtonCss(null,"style='width:160px'")
-                // jmolButton("Ramachandran relative")
-                // jmolButton("Quaternion difference")
+            <script type="text/javascript">
+                // jmolButton("load ?","Load URL")
                 // jmolBr()
-    </script>*@
+                jmolCheckbox("set pdbAddHydrogens TRUE", "set pdbAddHydrogens FALSE", "with hydrogens", false)
+                jmolBr()
+                jmolButton("load ?", "Load FILE")
+                jmolBr()
+                jmolButton("write FILE ?", "Save FILE")
+                jmolBr()
+                jmolButton("write image jsmol.jpg", "Save JPG")
+                jmolBr()
+                jmolButton("write image jsmol.png", "Save PNG")
+                jmolBr()
+            </script>
+        </form>
+
+        <script type="text/javascript">
+            jmolBr()
+            jmolButton("color cpk")
+            jmolButton("color group")
+            jmolButton("color amino")
+            jmolButton("color structure")
+            jmolBr()
+            jmolButton("trace only")
+            jmolButton("cartoon only")
+            jmolButton("backbone only")
+            jmolButton("spacefill only;spacefill 23%;wireframe 0.15", "ball&stick")
+            jmolBr()
+                    // Jmol.setButtonCss(null,"style='width:160px'")
+                    // jmolButton("Ramachandran relative")
+                    // jmolButton("Quaternion difference")
+                    // jmolBr()
+        </script>*@
 
 </body>
 </html>
