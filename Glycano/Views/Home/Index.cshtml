@@ -16,7 +16,7 @@
             crossorigin="anonymous">
     </script>
 
-    <script type="text/javascript" src="~/Scripts/JSmol.min.js"></script>
+    <script type="text/javascript" src="Scripts/JSmol.min.js"></script>
 
 
 </head>
@@ -57,11 +57,10 @@
             color: "white",
             addSelectionOptions: false,
             serverURL: "www.chemapps.stolaf.edu/jmol/jsmol/php/jsmol.php",
-            //serverURL: "https://jsmol3d.firebaseapp.com/",
             use: "HTML5",
-            jarPath: "~/Scripts/java",
-            j2sPath: "~/Scripts/j2s",
-            jarFile: "~/Scripts/java/JmolAppletSigned0.jar",
+            jarPath: "Scripts/java",
+            j2sPath: "Scripts/j2s",
+            jarFile: "Scripts/java/JmolAppletSigned0.jar",
             isSigned: true,
             readyFunction: jmol_isReady,
             script: script,
@@ -100,22 +99,20 @@
                 success: function (data) {
                     //Takes the given session ID filename received from the server
                     //Adds the PDB extension to the filename.
-                    // window.xxxx = data + ".pdb";
-                    alert(data);
-                    //window.xxxx = "~/Data/newMaltose.pdb";
-
+                    window.xxxx = "Data/Thr.pdb";
+                    alert(window.xxxx);
                     ////Updates the JSmol script to reload the applet with the new Molecule File.
-                    //window.script = 'h2oOn=true;set animframecallback "jmolscript:if (!selectionHalos) {select model=_modelNumber}";'
-                    //    + 'set errorCallback "myCallback";'
-                    //    + 'set defaultloadscript "isDssp = false;set defaultVDW babel;if(!h2oOn){display !water}";'
-                    //    + 'set zoomlarge false;set echo top left;echo loading...;refresh;'
-                    //    + 'load XXXX;set echo top center;echo XXXX;'
-                    //    + 'spacefill off;wireframe off;cartoons on;color structure;';
-                    //window.script = window.script.replace(/XXXX/g, window.xxxx);
-                    //window.InfoVar.script = window.script;
+                    window.script = 'h2oOn=true;set animframecallback "jmolscript:if (!selectionHalos) {select model=_modelNumber}";'
+                        + 'set errorCallback "myCallback";'
+                        + 'set defaultloadscript "isDssp = false;set defaultVDW babel;if(!h2oOn){display !water}";'
+                        + 'set zoomlarge false;set echo top left;echo loading...;refresh;'
+                        + 'load XXXX;set echo top center;echo XXXX;'
+                        + 'spacefill off;wireframe off;cartoons on;color structure;';
+                    window.script = window.script.replace(/XXXX/g, window.xxxx);
+                    window.InfoVar.script = window.script;
 
-                    ////Changes the molecule displayed in the applet.
-                    //Jmol.script(jmolApplet0, window.script);
+                    //Changes the molecule displayed in the applet.
+                    Jmol.script(jmolApplet0, window.script);
                 },
                 error: function (XHR, text, errorThrown) {
                     //Throws an error if the post doesn't work
@@ -137,23 +134,13 @@
 
     <table style="margin-left:auto; margin-right:auto;">
         <tr>
-            <td><div id="leftpanel"></div></td>
-            <td><div id="rightpanel"></div></td>
+            <td><div id="upperpanel"></div></td>
+        </tr>
+        <tr>
+            <td><div id="lowerpanel"></div></td>
         </tr>
     </table>
 
-    <!-- <nav class="navbar navbar-dark bg-dark">
-      <form class="form-inline">
-        <button class="btn btn-outline-success" type="button" onclick= "jmolButton('color cpk')">Colour by Element</button>
-        <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('color group')">Colour by Group</button>
-        <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('color amino')">Colour by Amino</button>
-        <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('color structure')">Colour by Structure</button>
-        <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('trace only')">Trace</button>
-        <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('cartoon only')">Cartoon</button>
-        <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('backbone only')">Backbone</button>
-        <button class="btn btn-outline-secondary" type="button" onclick= "jmolButton('spacefill only;spacefill 23%;wireframe 0.15,ball&stick')">Ball and Stick</button>
-      </form>
-    </nav> -->
     @*<form>
             <script type="text/javascript">
                 // jmolButton("load ?","Load URL")
