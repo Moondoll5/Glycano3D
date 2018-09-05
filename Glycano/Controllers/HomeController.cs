@@ -31,10 +31,7 @@ namespace Glycano.Controllers
 
             //Gets sessionID unique to current browser.
             string sessionId = System.Web.HttpContext.Current.Session.SessionID;
-            Data session = new Data
-            {
-                Value = sessionId
-            };
+            Data session = new Data { Value = sessionId };
 
             //start.Arguments = data.Value + " -o " + sessionId;
             ////start.WindowStyle = ProcessWindowStyle.Hidden;

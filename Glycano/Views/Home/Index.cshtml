@@ -35,20 +35,6 @@
 
         }
 
-        //Creates a script which loads the initial default PDB file.
-        var xxxx = "";
-        if (xxxx.length == 5 || xxxx.length == 0) {
-            xxxx = (xxxx + "?1crn").substring(1, 5)
-            script = 'h2oOn=true;set animframecallback "jmolscript:if (!selectionHalos) {select model=_modelNumber}";'
-                + 'set errorCallback "myCallback";'
-                + 'set defaultloadscript "isDssp = false;set defaultVDW babel;if(!h2oOn){display !water}";'
-                + 'set zoomlarge false;set echo top left;echo loading...;refresh;'
-                + 'load "http://www.rcsb.org/pdb/files/XXXX.pdb";set echo top center;echo XXXX;'
-                + 'spacefill off;wireframe off;cartoons on;color structure;'
-            script = script.replace(/XXXX/g, xxxx)
-        } else {
-            script = unescape(xxxx.substring(1))
-        }
         //Gives the JSmol specifications
         var InfoVar = {
             width: 450,
@@ -100,23 +86,21 @@
                     //Takes the given session ID filename received from the server
                     //Adds the PDB extension to the filename.
                     window.xxxx = "Data/maltose.pdb";
-                    alert(window.xxxx);
+
                     ////Updates the JSmol script to reload the applet with the new Molecule File.
-                    window.script = 'h2oOn=true;set animframecallback "jmolscript:if (!selectionHalos) {select model=_modelNumber}";'
-                        + 'set errorCallback "myCallback";'
-                        + 'set defaultloadscript "isDssp = false;set defaultVDW babel;if(!h2oOn){display !water}";'
-                        + 'set zoomlarge false;set echo top left;echo loading...;refresh;'
-                        + 'load XXXX;set echo top center;echo XXXX;'
-                        + 'spacefill off;wireframe off;cartoons on;color structure;';
+                    window.script = 'load XXXX; cartoons on; color cpk;';
                     window.script = window.script.replace(/XXXX/g, window.xxxx);
                     window.InfoVar.script = window.script;
+
+                    window.InfoVar.serverURL = "http://glycano.azurewebsites.net/";
+
 
                     //Changes the molecule displayed in the applet.
                     Jmol.script(jmolApplet0, window.script);
                 },
                 error: function (XHR, text, errorThrown) {
                     //Throws an error if the post doesn't work
-                    alert("Error: Data could not be retrieved.");
+                    alert("Error: Molecule could not be retrieved.");
                 }
             });
 
@@ -137,7 +121,7 @@
             <td><div id="upperpanel"></div></td>
         </tr>
         <tr>
-            <td><div id="lowerpanel"></div></td>
+            <td><div id="middlepanel"></div></td>
         </tr>
     </table>
 
