@@ -56,14 +56,14 @@
             debug: false,
             color: "white",
             addSelectionOptions: false,
-            serverURL: "www.chemapps.stolaf.edu/jmol/jsmol/php/jsmol.php",
+            serverURL: "http://glycano.azurewebsites.net/",
             use: "HTML5",
             jarPath: "Scripts/java",
             j2sPath: "Scripts/j2s",
             jarFile: "Scripts/java/JmolAppletSigned0.jar",
             isSigned: true,
             readyFunction: jmol_isReady,
-            script: script,
+            script: "",
             disableInitialConsole: true
         }
 
@@ -99,7 +99,7 @@
                 success: function (data) {
                     //Takes the given session ID filename received from the server
                     //Adds the PDB extension to the filename.
-                    window.xxxx = "Data/Thr.pdb";
+                    window.xxxx = "Data/maltose.pdb";
                     alert(window.xxxx);
                     ////Updates the JSmol script to reload the applet with the new Molecule File.
                     window.script = 'h2oOn=true;set animframecallback "jmolscript:if (!selectionHalos) {select model=_modelNumber}";'
