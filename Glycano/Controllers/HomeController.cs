@@ -26,23 +26,23 @@ namespace Glycano.Controllers
         {
             //To run CarbBuilder
             //Gives path to CarbBuilder and arguments before running it.
-            //ProcessStartInfo start = new ProcessStartInfo();
-            //start.FileName = Server.MapPath("~/CarbBuilder/CarbBuilder2.exe");
+            ProcessStartInfo start = new ProcessStartInfo();
+            start.FileName = Server.MapPath("~/CarbBuilder/CarbBuilder2.exe");
 
             //Gets sessionID unique to current browser.
             string sessionId = System.Web.HttpContext.Current.Session.SessionID;
             Data session = new Data { Value = sessionId };
 
-            //start.Arguments = data.Value + " -o " + sessionId;
-            ////start.WindowStyle = ProcessWindowStyle.Hidden;
-            ////start.CreateNoWindow = true;
-            //int exitCode;
+            start.Arguments = data.Value + " -o Data/" + sessionId;
+            //start.WindowStyle = ProcessWindowStyle.Hidden;
+            //start.CreateNoWindow = true;
+            int exitCode;
 
-            //using (Process proc = Process.Start(start))
-            //{
-            //    proc.WaitForExit();
-            //    exitCode = proc.ExitCode;
-            //}
+            using (Process proc = Process.Start(start))
+            {
+                proc.WaitForExit();
+                exitCode = proc.ExitCode;
+            }
 
             //Sends sessionID to client
             //SessionID is used as filename for PDB files.

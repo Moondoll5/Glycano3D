@@ -17,11 +17,10 @@
     </script>
 
     <script type="text/javascript" src="Scripts/JSmol.min.js"></script>
-
-
+    
 </head>
 <body style="float:right; width: 50%; position: relative">
-    @*Main NavBar*@
+    <!--Main NavBar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="width: 100%">
         <a class="navbar-brand" href="#">Glycano 3D</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +29,6 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-
                 <li class="nav-item">
                     <!-- Form with text field to input arguments to CarbBuilder -->
                     <form method="POST">
@@ -83,8 +81,6 @@
         //Prevents X-Frame-Options Error
         delete Jmol._tracker;
 
-        //Jmol._debugCode = (xxxx.indexOf("debugcode") >= 0);
-
         //Creates the applet and its border.
         jmol_isReady = function (applet) {
             Jmol._getElement(applet, "appletdiv").style.border = "1px solid pink";
@@ -109,14 +105,6 @@
             script: "",
             disableInitialConsole: true
         }
-
-        //Functions for the JSmol buttons on the HTML
-        function jmolCheckbox(script1, script0, text, ischecked) { Jmol.jmolCheckbox(window.jmolApplet0, script1, script0, text, ischecked) }
-        function jmolButton(script, text) { Jmol.jmolButton(window.jmolApplet0, script, text) }
-        function jmolHtml(s) { document.write(s) };
-        function jmolBr() { jmolHtml("<br>") }
-        function jmolMenu(a) { Jmol.jmolMenu(window.jmolApplet0, a) }
-
     </script>
 
     <script>
@@ -134,7 +122,7 @@
                 success: function (data) {
                     //Takes the given session ID filename received from the server
                     //Adds the PDB extension to the filename.
-                    window.xxxx = "Data/maltose.pdb";
+                    window.xxxx = "Data/" + data + ".pdb";
 
                     ////Updates the JSmol script to reload the applet with the new Molecule File.
                     window.script = 'load XXXX; cartoons on; color cpk;';
@@ -156,25 +144,16 @@
         });
     </script>
 
-    @*<div id="upperpanel" style="float: right; background-color: red; width: 50px; height: 50px"></div>*@
-
     <script type="text/javascript">
+        //Functions for the JSmol buttons on the HTML
+        function jmolCheckbox(script1, script0, text, ischecked) { Jmol.jmolCheckbox(window.jmolApplet0, script1, script0, text, ischecked) }
+        function jmolButton(script, text) { Jmol.jmolButton(window.jmolApplet0, script, text) }
+        function jmolHtml(s) { document.write(s) };
+        function jmolBr() { jmolHtml("<br>") }
+        function jmolMenu(a) { Jmol.jmolMenu(window.jmolApplet0, a) }
         var jmolApplet0 = Jmol.getApplet("jmolApplet0", InfoVar);
 
-     //   Jmol.setButtonCss(null, "style='margin-left: 5px'");
-     //   $("#rightpanel").html(jmolButton("load ?", "Load FILE"));
     </script>
-
-
-
-    @*<table style="margin-left:auto; margin-right:auto;">
-            <tr>
-                <td><div id="upperpanel"></div></td>
-            </tr>
-            <tr>
-                <td><div id="middlepanel"></div></td>
-            </tr>
-        </table>*@
 
     @*<form>
             <script type="text/javascript">
