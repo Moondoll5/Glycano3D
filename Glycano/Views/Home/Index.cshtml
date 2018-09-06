@@ -20,8 +20,64 @@
 
 
 </head>
-<body>
-    <h1>Glycano 3D</h1>
+<body style="float:right; width: 50%; position: relative">
+    @*Main NavBar*@
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="width: 100%">
+        <a class="navbar-brand" href="#">Glycano 3D</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <!-- Form with text field to input arguments to CarbBuilder -->
+                    <form method="POST">
+                        <label for="args" style="color: white">CASPER Notation: </label>
+                        <input name="args" id="args" type="text">
+                        <button id="submitButton" type="submit" class="btn btn-primary">Generate 3D</button>
+                    </form>
+                </li>
+            </ul>
+
+            <!-- Justified right Button 3 -->
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <!-- Button 1 -->
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px">
+                            Colour Scheme
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000">
+                            <a class="dropdown-item" href="#">Elements</a>
+                            <a class="dropdown-item" href="#">Amino group</a>
+                            <a class="dropdown-item" href="#">Group</a>
+                            <a class="dropdown-item" href="#">Structure</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <!-- Button 2 -->
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px">
+                            Representations
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000">
+                            <a class="dropdown-item" href="#">Ball-and-stick</a>
+                            <a class="dropdown-item" href="#">Trace</a>
+                            <a class="dropdown-item" href="#">Cartoon</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <!-- Button 3 -->
+                    <button type="button" class="btn btn-primary" style="margin-left: 5px">Save File</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <script type="text/javascript">
         //Prevents X-Frame-Options Error
@@ -31,14 +87,15 @@
 
         //Creates the applet and its border.
         jmol_isReady = function (applet) {
-            Jmol._getElement(applet, "appletdiv").style.border = "1px solid pink"
+            Jmol._getElement(applet, "appletdiv").style.border = "1px solid pink";
+            Jmol._getElement(applet, "appletdiv").style.position = "relative";
 
         }
 
         //Gives the JSmol specifications
         var InfoVar = {
-            width: 450,
-            height: 450,
+            width: 700,
+            height: 600,
             debug: false,
             color: "white",
             addSelectionOptions: false,
@@ -61,14 +118,6 @@
         function jmolMenu(a) { Jmol.jmolMenu(window.jmolApplet0, a) }
 
     </script>
-
-
-    <!-- Form with text field to input arguments to CarbBuilder -->
-    <form method="POST">
-        <label for="args">Arguments: </label>
-        <input name="args" id="args" type="text">
-        <button id="submitButton" type="submit">Submit</button>
-    </form>
 
     <script>
         $('#submitButton').click(function (event) {
@@ -106,24 +155,29 @@
 
         });
     </script>
+
+    @*<div id="upperpanel" style="float: right; background-color: red; width: 50px; height: 50px"></div>*@
+
     <script type="text/javascript">
         var jmolApplet0 = Jmol.getApplet("jmolApplet0", InfoVar);
 
      //   Jmol.setButtonCss(null, "style='width:160px'");
      //   $("#rightpanel").html(
      //       jmolButton("load ?", "Load FILE")
-    
+
 	    //);
     </script>
 
-    <table style="margin-left:auto; margin-right:auto;">
-        <tr>
-            <td><div id="upperpanel"></div></td>
-        </tr>
-        <tr>
-            <td><div id="middlepanel"></div></td>
-        </tr>
-    </table>
+
+
+    @*<table style="margin-left:auto; margin-right:auto;">
+            <tr>
+                <td><div id="upperpanel"></div></td>
+            </tr>
+            <tr>
+                <td><div id="middlepanel"></div></td>
+            </tr>
+        </table>*@
 
     @*<form>
             <script type="text/javascript">
