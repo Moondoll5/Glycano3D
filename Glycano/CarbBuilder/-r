@@ -1,0 +1,13 @@
+ ----------------------------------
+ ---   CarbBuilder v2.0  -----------
+ ----------------------------------
+--- Authors:  Michelle Kuttel mkuttel@gmail.com, CarbBuilder v1 by Yue Mao and Michelle Kuttel
+--- CarbBuilder is distributed under:
+--- The Artistic License 2.0  Copyright (c) 2015 Michelle M. Kuttel
+---  For structures produced, please reference:  
+--- 	 Kuttel et al., Proceedings of the 7th IEEE International Conference on e-Science, 2011, p 395-402]
+ -----------------------------
+!!! Invalid command line argument:6
+
+!!! Some unspecified input format error occurred: - check structure specification carefully.
+!!! PDB file not built. 

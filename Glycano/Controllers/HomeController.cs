@@ -27,13 +27,13 @@ namespace Glycano.Controllers
             //To run CarbBuilder
             //Gives path to CarbBuilder and arguments before running it.
             ProcessStartInfo start = new ProcessStartInfo();
-            start.FileName = Server.MapPath("~/CarbBuilder/CarbBuilder2.exe");
-
+            start.FileName = Server.MapPath("D:/home/site/wwwroot/CarbBuilder/CarbBuilder2.exe");
+            start.UseShellExecute = false;
             //Gets sessionID unique to current browser.
             string sessionId = System.Web.HttpContext.Current.Session.SessionID;
             Data session = new Data { Value = sessionId };
 
-            start.Arguments = data.Value + " -o Data/" + sessionId;
+            start.Arguments = data.Value + " -o ../Data/" + sessionId;
             //start.WindowStyle = ProcessWindowStyle.Hidden;
             //start.CreateNoWindow = true;
             int exitCode;
