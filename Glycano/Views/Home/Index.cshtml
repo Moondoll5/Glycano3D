@@ -39,7 +39,7 @@
                 </li>
             </ul>
 
-            <!-- Justified right Button 3 -->
+            <!-- Justified right -->
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <!-- Button 1 -->
@@ -110,7 +110,7 @@
     <script>
         $('#submitButton').click(function (event) {
             event.preventDefault();
-            //-i "->2)aLRha(1->2)aLRha(1->3)aLRha(1->3)bDGlcNAc(1->" -r 6
+            //"->2)aLRha(1->2)aLRha(1->3)aLRha(1->3)bDGlcNAc(1->" -r 6
             var args = $('#args').val();
             var data = { Value: args };
 
@@ -122,18 +122,17 @@
                 success: function (data) {
                     //Takes the given session ID filename received from the server
                     //Adds the PDB extension to the filename.
-                    //window.xxxx = "Data/" + data + ".pdb";
-                 
-                    alert(data);   //////Updates the JSmol script to reload the applet with the new Molecule File.
-                    //window.script = 'load XXXX; cartoons on; color cpk;';
-                    //window.script = window.script.replace(/XXXX/g, window.xxxx);
-                    //window.InfoVar.script = window.script;
+                    window.xxxx = "Data/" + data + ".pdb";
 
-                    //window.InfoVar.serverURL = "http://glycano.azurewebsites.net/";
+                    //Updates the JSmol script to reload the applet with the new Molecule File.
+                    window.script = 'load XXXX; cartoons on; color cpk;';
+                    window.script = window.script.replace(/XXXX/g, window.xxxx);
+                    window.InfoVar.script = window.script;
+                    window.InfoVar.serverURL = "http://glycano.azurewebsites.net/";
 
 
-                    ////Changes the molecule displayed in the applet.
-                    //Jmol.script(jmolApplet0, window.script);
+                    //Changes the molecule displayed in the applet.
+                    Jmol.script(jmolApplet0, window.script);
                 },
                 error: function (XHR, text, errorThrown) {
                     //Throws an error if the post doesn't work
