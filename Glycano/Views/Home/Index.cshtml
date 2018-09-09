@@ -47,12 +47,7 @@
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px">
                             Colour Scheme
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000">
-                            <a class="dropdown-item" href="#">Elements</a>
-                            <a class="dropdown-item" href="#">Amino group</a>
-                            <a class="dropdown-item" href="#">Group</a>
-                            <a class="dropdown-item" href="#">Structure</a>
-                        </div>
+                        <div id="cDropdown"class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000"></div>
                     </div>
                 </li>
 
@@ -62,16 +57,11 @@
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px">
                             Representations
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000">
-                            <a class="dropdown-item" href="#">Ball-and-stick</a>
-                            <a class="dropdown-item" href="#">Trace</a>
-                            <a class="dropdown-item" href="#">Cartoon</a>
-                        </div>
+                        <div id="rDropdown" class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000"></div>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li id="saveButton" class="nav-item">
                     <!-- Button 3 -->
-                    <button type="button" class="btn btn-primary" style="margin-left: 5px">Save File</button>
                 </li>
             </ul>
         </div>
@@ -152,6 +142,28 @@
         function jmolMenu(a) { Jmol.jmolMenu(window.jmolApplet0, a) }
         var jmolApplet0 = Jmol.getApplet("jmolApplet0", InfoVar);
 
+        //Adds button styling
+        Jmol.setButtonCss(null,"style='display: block;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: inherit;white-space: nowrap;background-color: transparent;border: 0;'");
+
+        //Adds dropdown JSmol menu items to Colour Scheme menu
+        $("#cDropdown").html(
+            Jmol.jmolButton("jmolApplet0", "color cpk", "Colour by element")+
+            Jmol.jmolButton("jmolApplet0", "color group", "Colour by group")+
+            Jmol.jmolButton("jmolApplet0", "color structure", "Colour by structure")
+        );
+
+        //Adds dropdown JSmol menu items to Colour Scheme menu
+        //$("#rDropdown").html(
+        //    Jmol.jmolButton("jmolApplet0", "cartoon only", "Cartoon")+
+        //    Jmol.jmolButton("jmolApplet0", "backbone only", "Backbone")+
+       //     Jmol.jmolButton("jmolApplet0", "trace only", "Trace")+
+        //    Jmol.jmolButton("jmolApplet0", "spacefill only;spacefill 23%;wireframe 0.15", "Ball-and-stick")
+       // );
+
+        //Adds dropdown JSmol menu items to Colour Scheme menu
+       // $("#saveButton").html(
+       //     Jmol.jmolButton("jmolApplet0", "write FILE ?", "Save file")
+       // );
     </script>
 
     @*<form>
@@ -169,24 +181,12 @@
                 jmolButton("write image jsmol.png", "Save PNG")
                 jmolBr()
             </script>
-        </form>
+        </form>*@
 
-        <script type="text/javascript">
-            jmolBr()
-            jmolButton("color cpk")
-            jmolButton("color group")
-            jmolButton("color amino")
-            jmolButton("color structure")
-            jmolBr()
-            jmolButton("trace only")
-            jmolButton("cartoon only")
-            jmolButton("backbone only")
-            jmolButton("spacefill only;spacefill 23%;wireframe 0.15", "ball&stick")
-            jmolBr()
-                    // Jmol.setButtonCss(null,"style='width:160px'")
-                    // jmolButton("Ramachandran relative")
-                    // jmolButton("Quaternion difference")
-                    // jmolBr()
+    @*<script type="text/javascript">
+            // jmolButton("Ramachandran relative")
+            // jmolButton("Quaternion difference")
+            // jmolBr()
         </script>*@
 
 </body>
