@@ -16,8 +16,10 @@
             crossorigin="anonymous">
     </script>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script type="text/javascript" src="Scripts/JSmol.min.js"></script>
-    
+
 </head>
 <body style="float:right; width: 50%; position: relative">
     <!--Main NavBar-->
@@ -143,22 +145,22 @@
         var jmolApplet0 = Jmol.getApplet("jmolApplet0", InfoVar);
 
         //Adds button styling
-        Jmol.setButtonCss(null,"style='display: block;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: inherit;white-space: nowrap;background-color: transparent;border: 0;'");
+       // Jmol.setButtonCss(null,"style='display: block;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: inherit;white-space: nowrap;background-color: transparent;border: 0;'");
 
         //Adds dropdown JSmol menu items to Colour Scheme menu
         $("#cDropdown").html(
-            Jmol.jmolButton("jmolApplet0", "color cpk", "Colour by element")+
-            Jmol.jmolButton("jmolApplet0", "color group", "Colour by group")+
+            Jmol.jmolButton("jmolApplet0", "color cpk", "Colour by group") +
+            Jmol.jmolButton("jmolApplet0", "color group", "Colour by group") +
             Jmol.jmolButton("jmolApplet0", "color structure", "Colour by structure")
         );
 
         //Adds dropdown JSmol menu items to Colour Scheme menu
         //$("#rDropdown").html(
-        //    Jmol.jmolButton("jmolApplet0", "cartoon only", "Cartoon")+
+        //    Jmol.jmolButton("jmolApplet0", "cartoon only", "Cartoon")
         //    Jmol.jmolButton("jmolApplet0", "backbone only", "Backbone")+
-       //     Jmol.jmolButton("jmolApplet0", "trace only", "Trace")+
+        //    Jmol.jmolButton("jmolApplet0", "trace only", "Trace")+
         //    Jmol.jmolButton("jmolApplet0", "spacefill only;spacefill 23%;wireframe 0.15", "Ball-and-stick")
-       // );
+        //);
 
         //Adds dropdown JSmol menu items to Colour Scheme menu
        // $("#saveButton").html(
