@@ -16,6 +16,8 @@
             crossorigin="anonymous">
     </script>
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script type="text/javascript" src="Scripts/JSmol.min.js"></script>
@@ -36,7 +38,7 @@
                     <form method="POST">
                         <label for="args" style="color: white">CASPER input: </label>
                         <input name="args" id="args" type="text">
-                        <button id="submitButton" type="submit" class="btn btn-primary">Generate 3D</button>
+                        <button id="submitButton" type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Generate 3D</button>
                     </form>
                 </li>
             </ul>
@@ -47,7 +49,7 @@
                     <!-- Button 1 -->
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px">
-                            Colour Scheme
+                            <i class="fas fa-palette"></i> Colour Scheme
                         </button>
                         <div id="cDropdown"class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000"></div>
                     </div>
@@ -56,7 +58,7 @@
                     <!-- Button 2 -->
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px">
-                            Representations
+                            <i class="fas fa-shapes"></i> Representations
                         </button>
                         <div id="rDropdown" class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000"></div>
                     </div>
@@ -65,7 +67,7 @@
                     @*Button 3*@
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px">
-                            Save...
+                            <i class="fas fa-save"></i> Save...
                         </button>
                         <div id="saveBtns" class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000"></div>
                     </div>
@@ -149,9 +151,9 @@
                         function jmolBr() { jmolHtml("<br>") }
                         function jmolMenu(a) { Jmol.jmolMenu(window.jmolApplet0, a) }
                         var jmolApplet0 = Jmol.getApplet("jmolApplet0", InfoVar);
-
+                        
                         //Adds button styling
-                        Jmol.setButtonCss(null,"style='display: block;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: inherit;white-space: nowrap;background-color: transparent;border: 0;'");
+                        Jmol.setButtonCss(null,"style='display: inline;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: inherit;white-space: nowrap;background-color: transparent;border: 0;'");
                        
                         //Adds dropdown JSmol menu items to Colour Scheme menu
                         $("#cDropdown").html(
@@ -178,70 +180,17 @@
                             Jmol.jmolButton("jmolApplet0", "write STATE jsmol.spt","Save state")
                         );
     </script>
-
-    @*<div style="width: 700px">
-        <script>
-            jmolButton("color cpk", "Colour by element")
-            jmolButton("color group", "Colour by group")
-            jmolButton("color structure", "Colour by structure")
-            jmolBr()
-            jmolButton("trace only", "Trace")
-            jmolButton("cartoon only", "Cartoon")
-            jmolButton("backbone only", "Backbone")
-            jmolButton("spacefill only;spacefill 23%;wireframe 0.15","Ball-and-stick")
-        </script>
-    </div>*@
-
+    
     @*<form>
         <script type="text/javascript">
-Jmol.setButtonCss(null,"style='width:160px'")
-jmolCheckbox("set pdbAddHydrogens TRUE","set pdbAddHydrogens FALSE","with hydrogens",false)
-jmolBr()
-jmolButton("load ?","Load URL")
-jmolBr()
-jmolButton("load file://?","Load FILE")
-jmolBr()
-jmolButton("script ?.spt","Load SCRIPT")
-jmolBr()
-jmolCheckbox("h2oOn=true;display *","h2oOn=false;display !water","display water",true)
-jmolBr()
-jmolBr()
-jmolButton("write FILE ?","Save FILE")
-jmolBr()
-jmolButton("write IMAGE jsmol.jpg","Save JPG")
-jmolBr()
-jmolButton("write IMAGE jsmol.png","Save PNG")
-jmolBr()
-jmolButton("write jsmol.jmol","Save Jmol")
-jmolBr()
-jmolButton("write PNGJ jsmol.png","Save PNG+Jmol")
-jmolBr()
-jmolButton("write STATE jsmol.spt","Save STATE")
-jmolBr()
-
-
+            jmolButton("load file://?","Load FILE")
         </script>
     </form>
             <script type="text/javascript">
-jmolBr()
-Jmol.setButtonCss(null,"style='width:120px'")
-jmolButton("color cpk")
-jmolButton("color group")
-jmolButton("color amino")
-jmolButton("color structure")
-jmolBr()
-jmolButton("trace only")
-jmolButton("cartoon only")
-jmolButton("backbone only")
-jmolButton("spacefill only;spacefill 23%;wireframe 0.15","ball&stick")
-jmolBr()
-Jmol.setButtonCss(null,"style='width:60px'")
-jmolButton("Ramachandran relative")
-jmolButton("Quaternion difference")
-jmolBr()
-Jmol.setButtonCss(null,"style='width:100px'")
-jmolButton("console")
-Jmol.jmolCommandInput(jmolApplet0)
+            jmolButton("Ramachandran relative")
+            jmolButton("Quaternion difference")
+            jmolButton("console")
+            Jmol.jmolCommandInput(jmolApplet0)
             </script>*@
 
 </body>
