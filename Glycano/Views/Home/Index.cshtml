@@ -161,12 +161,12 @@
                         );
 
                         //Adds dropdown JSmol menu items to Colour Scheme menu
-                        //$("#rDropdown").html(
-                        //    Jmol.jmolButton("jmolApplet0", "cartoon only", "Cartoon")+
-                        //    Jmol.jmolButton("jmolApplet0", "backbone only", "Backbone")+
-                        //    Jmol.jmolButton("jmolApplet0", "trace only", "Trace")+
-                        //    Jmol.jmolButton("jmolApplet0", "spacefill only;spacefill 23%;wireframe 0.15", "Ball-and-stick")
-                        //);
+                        $("#rDropdown").html(
+                            Jmol.jmolButton("jmolApplet0", "spacefill only;", "Space-fill") +
+                            Jmol.jmolButton("jmolApplet0", "wireframe only;", "Wireframe")+
+                            Jmol.jmolButton("jmolApplet0", "wireframe 0.3; spacefill off;", "Stick")+
+                            Jmol.jmolButton("jmolApplet0", "spacefill only;spacefill 23%;wireframe 0.15", "Ball-and-stick")
+                        );
 
                         //Adds dropdown JSmol menu items to Colour Scheme menu
                         $("#saveBtns").html(
