@@ -24,29 +24,38 @@ namespace Glycano.Controllers
         [HttpPost]
         public JsonResult GetValue(Data data)
         {
-            //To run CarbBuilder. Gives path to CarbBuilder and arguments before running it.
-            ProcessStartInfo start = new ProcessStartInfo();
-            start.FileName = "D:/home/site/wwwroot/CarbBuilder/CarbBuilder2.exe";
-
-            //Gets sessionID unique to current browser.
-            string sessionId = System.Web.HttpContext.Current.Session.SessionID;
-            Data session = new Data { Value = sessionId };
-
-            //Local host
-            //start.Arguments = data.Value + " -o /Users/dllima001/source/repos/Gly/Glycano/Data/" + sessionId;
-            start.Arguments = "-i " + data.Value + " -o /home/site/wwwroot/Data/" + sessionId;
-        
-            int exitCode;
-
-            using (Process proc = Process.Start(start))
+            //Checks if data was received. If not, error is returned.
+            if (data.Value == null || data.Value == "")
             {
-                proc.WaitForExit();
-                exitCode = proc.ExitCode;
+                Data error = new Data { Value = "error" };
+                return Json(error.Value, JsonRequestBehavior.AllowGet);
             }
+            else
+            {
+                //To run CarbBuilder. Gives path to CarbBuilder and arguments before running it.
+                ProcessStartInfo start = new ProcessStartInfo();
+                start.FileName = "D:/home/site/wwwroot/CarbBuilder/CarbBuilder2.exe";
 
-            //Sends sessionID to client
-            //SessionID is used as filename for PDB files.
-            return Json(session.Value, JsonRequestBehavior.AllowGet);
+                //Gets sessionID unique to current browser.
+                string sessionId = System.Web.HttpContext.Current.Session.SessionID;
+                Data session = new Data { Value = sessionId };
+
+                //Local host
+                //start.Arguments = data.Value + " -o /Users/dllima001/source/repos/Gly/Glycano/Data/" + sessionId;
+                start.Arguments = "-i " + data.Value + " -o /home/site/wwwroot/Data/" + sessionId;
+
+                int exitCode;
+
+                using (Process proc = Process.Start(start))
+                {
+                    proc.WaitForExit();
+                    exitCode = proc.ExitCode;
+                }
+
+                //Sends sessionID to client
+                //SessionID is used as filename for PDB files.
+                return Json(session.Value, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

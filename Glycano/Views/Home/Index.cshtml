@@ -108,6 +108,9 @@
 
                 $('#submitButton').click(function (event) {
                     event.preventDefault();
+                    //Notifies the user that the molecule is loading
+                    swal("Please wait...", "Molecule is loading.", "info");
+
                     //"->2)aLRha(1->2)aLRha(1->3)aLRha(1->3)bDGlcNAc(1->" -r 6
                     var args = $('#args').val();
                     var data = { Value: args };
@@ -122,21 +125,31 @@
                             //Adds the PDB extension to the filename.
                             window.xxxx = "Data/" + data + ".pdb";
 
-                            //Updates the JSmol script to reload the applet with the new Molecule File.
-                            window.script = 'load XXXX; cartoons on; color cpk;';
-                            window.script = window.script.replace(/XXXX/g, window.xxxx);
-                            window.InfoVar.script = window.script;
-                            window.InfoVar.serverURL = "http://glycano.azurewebsites.net/";
-                            
-                            //Notifies the user that the molecule is loading
-                            swal("Please wait...", "Molecule is loading.", "info");
+                            //Checks if CarbBuilder created the file.
+                            //If not, there was an error and error.pdb is returned as the data.
+                            $.ajax({
+                                url: 'http://glycano.azurewebsites.net/' + window.xxxx, //or your url
+                                success: function (data) {
+                                    //Updates the JSmol script to reload the applet with the new Molecule File.
+                                    window.script = 'load XXXX; cartoons on; color cpk;';
+                                    window.script = window.script.replace(/XXXX/g, window.xxxx);
+                                    window.InfoVar.script = window.script;
+                                    window.InfoVar.serverURL = "http://glycano.azurewebsites.net/";
 
-                            //Changes the molecule displayed in the applet.
-                            Jmol.script(jmolApplet0, window.script);
+                                    //Changes the molecule displayed in the applet.
+                                    Jmol.script(jmolApplet0, window.script);
+
+                                    //Displays once molecule is loaded.
+                                    swal("Success", "Molecule was successfully loaded.", "success");
+                                },
+                                error: function (data) {
+                                    swal("Error", "Molecule could not be retrieved. Please try again.\nEnsure that:\n*You added at least one monosaccharide in the 2D workspace.\n*Your molecule contains supported residues.\n*Java or Javascript is enabled in your browser.\n*The server is online.\n", "error");
+                                },
+                            });                                                        
                         },
                         error: function (XHR, text, errorThrown) {
                             //Throws an error if the post doesn't work
-                            swal("Error", "Molecule could not be retrieved. Please try again.\nEnsure that:\n*Your molecule contains supported residues.\n*Your CASPER input is correct.\n*Java or Javascript is enabled in your browser.\n*The server is online.\n", "error");
+                            swal("Error", "Molecule could not be retrieved. Please try again.\nEnsure that:\n*You added at least one monosaccharide in the 2D workspace.\n*Your molecule contains supported residues.\n*Java or Javascript is enabled in your browser.\n*The server is online.\n", "error");
                         }
                     });
 
@@ -185,13 +198,7 @@
         <script type="text/javascript">
             jmolButton("load file://?","Load FILE")
         </script>
-    </form>
-            <script type="text/javascript">
-            jmolButton("Ramachandran relative")
-            jmolButton("Quaternion difference")
-            jmolButton("console")
-            Jmol.jmolCommandInput(jmolApplet0)
-            </script>*@
+    </form>*@
 
 </body>
 </html>
