@@ -157,48 +157,69 @@
     </script>
 
     <script type="text/javascript">
-                        //Functions for the JSmol buttons on the HTML
-                        function jmolCheckbox(script1, script0, text, ischecked) { Jmol.jmolCheckbox(window.jmolApplet0, script1, script0, text, ischecked) }
-                        function jmolButton(script, text) { Jmol.jmolButton(window.jmolApplet0, script, text) }
-                        function jmolHtml(s) { document.write(s) };
-                        function jmolBr() { jmolHtml("<br>") }
-                        function jmolMenu(a) { Jmol.jmolMenu(window.jmolApplet0, a) }
-                        var jmolApplet0 = Jmol.getApplet("jmolApplet0", InfoVar);
+                //Functions for the JSmol buttons on the HTML
+                function jmolCheckbox(script1, script0, text, ischecked) { Jmol.jmolCheckbox(window.jmolApplet0, script1, script0, text, ischecked) }
+                function jmolButton(script, text) { Jmol.jmolButton(window.jmolApplet0, script, text) }
+                function jmolHtml(s) { document.write(s) };
+                function jmolBr() { jmolHtml("<br>") }
+                function jmolMenu(a) { Jmol.jmolMenu(window.jmolApplet0, a) }
+                var jmolApplet0 = Jmol.getApplet("jmolApplet0", InfoVar);
                         
-                        //Adds button styling
-                        Jmol.setButtonCss(null,"style='display: inline;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: inherit;white-space: nowrap;background-color: transparent;border: 0;'");
+                //Adds button styling
+                Jmol.setButtonCss(null,"style='display: inline;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: inherit;white-space: nowrap;background-color: transparent;border: 0;'");
                        
-                        //Adds dropdown JSmol menu items to Colour Scheme menu
-                        $("#cDropdown").html(
-                            Jmol.jmolButton("jmolApplet0", "color group", "Colour by group") +
-                            Jmol.jmolButton("jmolApplet0", "color structure", "Colour by structure")+
-                            Jmol.jmolButton("jmolApplet0", "color cpk", "Colour by element")
-                        );
+                //Adds dropdown JSmol menu items to Colour Scheme menu
+                $("#cDropdown").html(
+                    Jmol.jmolButton("jmolApplet0", "color group", "Colour by group") +
+                    Jmol.jmolButton("jmolApplet0", "color structure", "Colour by structure")+
+                    Jmol.jmolButton("jmolApplet0", "color cpk", "Colour by element")
+                );
 
-                        //Adds dropdown JSmol menu items to Colour Scheme menu
-                        $("#rDropdown").html(
-                            Jmol.jmolButton("jmolApplet0", "spacefill only;", "Space-fill") +
-                            Jmol.jmolButton("jmolApplet0", "wireframe only;", "Wireframe")+
-                            Jmol.jmolButton("jmolApplet0", "wireframe 0.3; spacefill off;", "Stick")+
-                            Jmol.jmolButton("jmolApplet0", "spacefill only;spacefill 23%;wireframe 0.15", "Ball-and-stick")
-                        );
+                //Adds dropdown JSmol menu items to Colour Scheme menu
+                $("#rDropdown").html(
+                    Jmol.jmolButton("jmolApplet0", "spacefill only;", "Space-fill") +
+                    Jmol.jmolButton("jmolApplet0", "wireframe only;", "Wireframe")+
+                    Jmol.jmolButton("jmolApplet0", "wireframe 0.3; spacefill off;", "Stick")+
+                    Jmol.jmolButton("jmolApplet0", "spacefill only;spacefill 23%;wireframe 0.15", "Ball-and-stick")
+                );
 
-                        //Adds dropdown JSmol menu items to Colour Scheme menu
-                        $("#saveBtns").html(
-                            Jmol.jmolButton("jmolApplet0", "write FILE ?","Save file")+
-                            Jmol.jmolButton("jmolApplet0", "write IMAGE jsmol.jpg","Save JPG")+
-                            Jmol.jmolButton("jmolApplet0", "write IMAGE jsmol.png","Save PNG")+
-                            Jmol.jmolButton("jmolApplet0", "write jsmol.jmol","Save Jmol")+
-                            Jmol.jmolButton("jmolApplet0", "write PNGJ jsmol.png","Save PNG and Jmol")+
-                            Jmol.jmolButton("jmolApplet0", "write STATE jsmol.spt","Save state")
-                        );
+                //Adds dropdown JSmol menu items to Colour Scheme menu
+                $("#saveBtns").html(
+                    Jmol.jmolButton("jmolApplet0", "write FILE ?","Save file")+
+                    Jmol.jmolButton("jmolApplet0", "write IMAGE jsmol.jpg","Save JPG")+
+                    Jmol.jmolButton("jmolApplet0", "write IMAGE jsmol.png","Save PNG")+
+                    Jmol.jmolButton("jmolApplet0", "write jsmol.jmol","Save Jmol")+
+                    Jmol.jmolButton("jmolApplet0", "write PNGJ jsmol.png","Save PNG and Jmol")+
+                    Jmol.jmolButton("jmolApplet0", "write STATE jsmol.spt","Save state")
+                );
+
+                //Hides duplicate buttons
+                var x = document.getElementsByName("jmolButton0");
+                x[1].style.display = "none";
+                x = document.getElementsByName("jmolButton1");
+                x[1].style.display = "none";
+                x = document.getElementsByName("jmolButton2");
+                x[1].style.display = "none";
+                x = document.getElementsByName("jmolButton3");
+                x[1].style.display = "none";
+                x = document.getElementsByName("jmolButton4");
+                x[1].style.display = "none";
+                x = document.getElementsByName("jmolButton5");
+                x[1].style.display = "none";
+                x = document.getElementsByName("jmolButton6");
+                x[1].style.display = "none";
+                x = document.getElementsByName("jmolButton7");
+                x[1].style.display = "none";
+                x = document.getElementsByName("jmolButton8");
+                x[1].style.display = "none";
+                 x = document.getElementsByName("jmolButton9");
+                x[1].style.display = "none";
+                x = document.getElementsByName("jmolButton10");
+                x[1].style.display = "none";
+                x = document.getElementsByName("jmolButton11");
+                x[1].style.display = "none";
+                 x = document.getElementsByName("jmolButton12");
+                x[1].style.display = "none";
     </script>
-    
-    @*<form>
-        <script type="text/javascript">
-            jmolButton("load file://?","Load FILE")
-        </script>
-    </form>*@
-
 </body>
 </html>
