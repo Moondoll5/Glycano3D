@@ -23,14 +23,14 @@
     <script type="text/javascript" src="Scripts/JSmol.min.js"></script>
 
 </head>
-<body style="float:right; width: 50%; position: relative">
+<body>
+    <div class="body-content" style="float:right; width: 50%;">
     <!--Main NavBar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="width: 100%">
         <a class="navbar-brand" href="#">Glycano 3D</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -41,10 +41,6 @@
                         <button id="submitButton" type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Generate 3D</button>
                     </form>
                 </li>
-            </ul>
-
-            <!-- Justified right -->
-            <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <!-- Button 1 -->
                     <div class="btn-group" role="group">
@@ -72,7 +68,6 @@
                         <div id="saveBtns" class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000"></div>
                     </div>
                 </li>
-
             </ul>
         </div>
     </nav>
@@ -85,15 +80,15 @@
                 jmol_isReady = function (applet) {
                     Jmol._getElement(applet, "appletdiv").style.border = "1px solid pink";
                     Jmol._getElement(applet, "appletdiv").style.position = "relative";
-
+                    Jmol._getElement(applet, "appletdiv").style.margin = "auto";
                 }
 
                 //Gives the JSmol specifications
                 var InfoVar = {
-                    width: 700,
-                    height: 550,
+                    width: 600,
+                    height: 600,
                     debug: false,
-                    color: "white",
+                    color: "black",
                     addSelectionOptions: false,
                     serverURL: "http://glycano.azurewebsites.net/",
                     use: "HTML5",
@@ -221,5 +216,6 @@
                  x = document.getElementsByName("jmolButton12");
                 x[1].style.display = "none";
     </script>
+    </div>
 </body>
 </html>
