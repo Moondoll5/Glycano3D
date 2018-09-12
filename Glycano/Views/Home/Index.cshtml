@@ -47,7 +47,7 @@
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px">
                             <i class="fas fa-palette"></i> Colour Scheme
                         </button>
-                        <div id="cDropdown"class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000"></div>
+                        <div id="cDropdown" class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000"></div>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -68,11 +68,25 @@
                         <div id="saveBtns" class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000"></div>
                     </div>
                 </li>
+                <li class="nav-item">
+                    @*Button 4*@
+                    <div class="btn-group" role="group">
+                        <input class="btn btn-primary dropdown-toggle" type="button" value="Validate" onclick="validate()" />
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
 
     <script type="text/javascript">
+                //Opens link to PDB Care to validate molecules
+                function validate(){
+                    swal("Moving to PDB-Care...", "Please ensure that you have saved your 3D molecule as a PDB file in order to validate it", "info");
+                    setTimeout(function(){
+                        window.open('http://www.glycosciences.de/tools/pdb-care/', '_blank');
+                    }, 5000);
+                }
+
                 //Prevents X-Frame-Options Error
                 delete Jmol._tracker;
 
