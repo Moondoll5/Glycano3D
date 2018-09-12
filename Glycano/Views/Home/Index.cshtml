@@ -71,6 +71,7 @@
                 <li class="nav-item">
                     @*Button 4*@
                     <div class="btn-group" role="group">
+                        <i class="far fa-check-circle"></i> 
                         <input class="btn btn-primary dropdown-toggle" type="button" value="Validate" onclick="validate()" />
                     </div>
                 </li>
@@ -82,10 +83,9 @@
                 //Opens link to PDB Care to validate molecules
                 function validate(){
                     swal("Moving to PDB-Care...", "Please ensure that you have saved your 3D molecule as a PDB file in order to validate it", "info");
-                    setTimeout(function(){
-                        window.open('http://www.glycosciences.de/tools/pdb-care/', '_blank');
-                    }, 5000);
+                    window.open('http://www.glycosciences.de/tools/pdb-care/', '_blank');
                 }
+
 
                 //Prevents X-Frame-Options Error
                 delete Jmol._tracker;
