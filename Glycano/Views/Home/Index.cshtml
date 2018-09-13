@@ -37,8 +37,14 @@
                     <!-- Form with text field to input arguments to CarbBuilder -->
                     <form method="POST">
                         <label for="args" style="color: white">CASPER input: </label>
-                        <input name="args" id="args" type="text">
-                        <button id="submitButton" type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Generate 3D</button>
+                        <div class="input-group mb-3">
+                            <input type="text" name="args" id="args" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit" id="submitButton"><i class="fas fa-plus"></i> Generate 3D</button>
+                            </div>
+                        </div>
+                        @*<input name="args" id="args" type="text">
+                        <button id="submitButton" type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Generate 3D</button>*@
                     </form>
                 </li>
                 <li class="nav-item">
@@ -83,6 +89,13 @@
                 function validate(){
                     swal("Moving to PDB-Care...", "Please ensure that you have saved your 3D molecule as a PDB file in order to validate it", "info");
                     window.open('http://www.glycosciences.de/tools/pdb-care/', '_blank');
+                }
+
+                function clearMol() {
+                    window.InfoVar.script = "";
+
+                    //Removes the molecule displayed in the applet.
+                    Jmol.script(jmolApplet0, "");
                 }
 
 
