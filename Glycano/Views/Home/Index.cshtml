@@ -65,14 +65,13 @@
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px">
                             <i class="fas fa-save"></i> Save...
                         </button>
-                        <div id="saveBtns" class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000"></div>
+                        <div id="saveBtns" class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000;"></div>
                     </div>
                 </li>
                 <li class="nav-item">
                     @*Button 4*@
                     <div class="btn-group" role="group">
-                        <i class="far fa-check-circle"></i> 
-                        <input class="btn btn-primary dropdown-toggle" type="button" value="Validate" onclick="validate()" />
+                        <button class="btn btn-primary" type="button" onclick="validate()" style="margin-left: 5px"><i class="far fa-check-circle"></i> Validate</button>
                     </div>
                 </li>
             </ul>
@@ -85,6 +84,7 @@
                     swal("Moving to PDB-Care...", "Please ensure that you have saved your 3D molecule as a PDB file in order to validate it", "info");
                     window.open('http://www.glycosciences.de/tools/pdb-care/', '_blank');
                 }
+
 
 
                 //Prevents X-Frame-Options Error
@@ -140,7 +140,7 @@
                                 url: 'http://glycano.azurewebsites.net/' + window.xxxx, //or your url
                                 success: function (data) {
                                     //Updates the JSmol script to reload the applet with the new Molecule File.
-                                    window.script = 'load XXXX; cartoons on; color cpk;';
+                                    window.script = 'load XXXX; spacefill only; spacefill 23%; wireframe 0.15; color cpk;';
                                     window.script = window.script.replace(/XXXX/g, window.xxxx);
                                     window.InfoVar.script = window.script;
                                     window.InfoVar.serverURL = "http://glycano.azurewebsites.net/";
