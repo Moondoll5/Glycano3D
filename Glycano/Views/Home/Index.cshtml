@@ -23,8 +23,8 @@
     <script type="text/javascript" src="Scripts/JSmol.min.js"></script>
 
 </head>
-<body>
-    <div class="body-content" style="float:right; width: 50%;">
+<body style="position: relative;">
+    <div class="body-content" style="float:right; width: 50%; height: 100%">
     <!--Main NavBar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="width: 100%">
         <a class="navbar-brand" href="#">Glycano 3D</a>
@@ -34,21 +34,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <!-- Form with text field to input arguments to CarbBuilder -->
-                    <form method="POST">
-                        <label for="args" style="color: white">CASPER input: </label>
-                        <div class="input-group mb-3">
-                            <input type="text" name="args" id="args" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit" id="submitButton"><i class="fas fa-plus"></i> Generate 3D</button>
-                            </div>
-                        </div>
-                    </form>
-                </li>
-                <li class="nav-item">
                     <!-- Button 1 -->
                     <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-palette"></i> Colour Scheme
                         </button>
                         <div id="cDropdown" class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000"></div>
@@ -57,7 +45,7 @@
                 <li class="nav-item">
                     <!-- Button 2 -->
                     <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 10px">
                             <i class="fas fa-shapes"></i> Representations
                         </button>
                         <div id="rDropdown" class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000"></div>
@@ -66,7 +54,7 @@
                 <li class="nav-item">
                     @*Button 3*@
                     <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 5px">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 10px">
                             <i class="fas fa-save"></i> Save...
                         </button>
                         <div id="saveBtns" class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="z-index: 10000;"></div>
@@ -75,12 +63,62 @@
                 <li class="nav-item">
                     @*Button 4*@
                     <div class="btn-group" role="group">
-                        <button class="btn btn-primary" type="button" onclick="validate()" style="margin-left: 5px"><i class="far fa-check-circle"></i> Validate</button>
+                        <button class="btn btn-primary" type="button" onclick="validate()" style="margin-left: 10px"><i class="far fa-check-circle"></i> Validate</button>
                     </div>
                 </li>
             </ul>
         </div>
     </nav>
+
+    @*Applet Div*@
+    <div class="container" style="width: 100%; height: 450px;">
+        <div class="row">
+            <div class="col-lg-8">
+                <script>
+                    //Creates the applet and its border.
+                        jmol_isReady = function (applet) {
+                            Jmol._getElement(applet, "appletdiv").style.border = "1px solid grey";
+                            Jmol._getElement(applet, "appletdiv").style.margin = "auto";
+                            Jmol._getElement(applet, "appletdiv").style.left = "0px";
+                            Jmol._getElement(applet, "appletdiv").style. top = "0px";
+                            Jmol._getElement(applet, "appletdiv").style.position = "absolute";
+                            Jmol._getElement(applet, "appletdiv").style.height = "100%";
+                            Jmol._getElement(applet, "appletdiv").style.display = "block";
+                        }
+
+                        //Gives the JSmol specifications
+                        var InfoVar = {
+                            width: 450,
+                            height: 450,
+                            debug: false,
+                            color: "black",
+                            addSelectionOptions: false,
+                            serverURL: "http://glycano.azurewebsites.net/",
+                            use: "HTML5",
+                            jarPath: "Scripts/java",
+                            j2sPath: "Scripts/j2s",
+                            jarFile: "Scripts/java/JmolAppletSigned0.jar",
+                            isSigned: true,
+                            readyFunction: jmol_isReady,
+                            script: "",
+                            disableInitialConsole: true,
+                        }
+
+                        var jmolApplet0 = Jmol.getApplet("jmolApplet0", InfoVar);
+                </script>
+            </div>
+            <div class="col-lg-4" style="background-color: #212529; text-align: center;">
+                <!-- Form with text field to input arguments to CarbBuilder -->
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="args" style="color: white">Type CASPER input here:</label>
+                        <textarea name="args" class="form-control" id="args" rows="10" style="max-height: 100%; max-width: 100%;"></textarea>
+                        <button class="btn btn-primary" type="submit" id="submitButton"><i class="fas fa-plus"></i> Generate 3D</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script type="text/javascript">
                 //Opens link to PDB Care to validate molecules
@@ -110,30 +148,8 @@
                 //Prevents X-Frame-Options Error
                 delete Jmol._tracker;
 
-                //Creates the applet and its border.
-                jmol_isReady = function (applet) {
-                    Jmol._getElement(applet, "appletdiv").style.border = "1px solid pink";
-                    Jmol._getElement(applet, "appletdiv").style.position = "relative";
-                    Jmol._getElement(applet, "appletdiv").style.margin = "auto";
-                }
-
-                //Gives the JSmol specifications
-                var InfoVar = {
-                    width: 600,
-                    height: 600,
-                    debug: false,
-                    color: "black",
-                    addSelectionOptions: false,
-                    serverURL: "http://glycano.azurewebsites.net/",
-                    use: "HTML5",
-                    jarPath: "Scripts/java",
-                    j2sPath: "Scripts/j2s",
-                    jarFile: "Scripts/java/JmolAppletSigned0.jar",
-                    isSigned: true,
-                    readyFunction: jmol_isReady,
-                    script: "",
-                    disableInitialConsole: true
-                }
+               
+        
 
                 $('#submitButton').click(function (event) {
                     event.preventDefault();
@@ -192,7 +208,7 @@
                 function jmolHtml(s) { document.write(s) };
                 function jmolBr() { jmolHtml("<br>") }
                 function jmolMenu(a) { Jmol.jmolMenu(window.jmolApplet0, a) }
-                var jmolApplet0 = Jmol.getApplet("jmolApplet0", InfoVar);
+              
                         
                 //Adds button styling
                 Jmol.setButtonCss(null,"style='display: inline;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: inherit;white-space: nowrap;background-color: transparent;border: 0;'");
@@ -215,10 +231,10 @@
                 //Adds dropdown JSmol menu items to Colour Scheme menu
                 $("#saveBtns").html(
                     Jmol.jmolButton("jmolApplet0", "write FILE ?","Save PDB file")+
-                    Jmol.jmolButton("jmolApplet0", "write IMAGE jsmol.jpg","Save JPG")+
-                    Jmol.jmolButton("jmolApplet0", "write IMAGE jsmol.png","Save PNG")+
-                    Jmol.jmolButton("jmolApplet0", "write jsmol.jmol","Save Jmol")+
-                    Jmol.jmolButton("jmolApplet0", "write STATE jsmol.spt","Save state")
+                    Jmol.jmolButton("jmolApplet0", "write IMAGE model.jpg","Save JPG")+
+                    Jmol.jmolButton("jmolApplet0", "write IMAGE model.png","Save PNG")+
+                    Jmol.jmolButton("jmolApplet0", "write model.jmol","Save Jmol")+
+                    Jmol.jmolButton("jmolApplet0", "write STATE model.spt","Save state")
                 );
 
                 //Hides duplicate buttons
