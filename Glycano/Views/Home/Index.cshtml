@@ -110,9 +110,13 @@
             <div class="col-lg-4" style="background-color: #212529; text-align: center;">
                 <!-- Form with text field to input arguments to CarbBuilder -->
                 <form method="POST">
-                    <div class="form-group">
+                    <div class="form-group" style="margin-top: 10px">
                         <label for="args" style="color: white">Type CASPER input here:</label>
-                        <textarea name="args" class="form-control" id="args" rows="10" style="max-height: 100%; max-width: 100%;"></textarea>
+                        <textarea name="args" class="form-control" id="args" rows="20" style="max-height: 100%; max-width: 100%;"></textarea>
+                        <div class="input-group mb-3" style="margin-top: 10px">
+                            <label for="repeats" style="color: white; margin-right: 10px">Number of repeats:</label>
+                            <input id="repeats" type="text" class="form-control" aria-label="number of repeats" aria-describedby="button-addon2" style="width: 50%; float: right">
+                        </div>
                         <button class="btn btn-primary" type="submit" id="submitButton"><i class="fas fa-plus"></i> Generate 3D</button>
                     </div>
                 </form>
