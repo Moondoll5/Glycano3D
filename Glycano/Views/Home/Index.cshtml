@@ -43,8 +43,6 @@
                                 <button class="btn btn-primary" type="submit" id="submitButton"><i class="fas fa-plus"></i> Generate 3D</button>
                             </div>
                         </div>
-                        @*<input name="args" id="args" type="text">
-                        <button id="submitButton" type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Generate 3D</button>*@
                     </form>
                 </li>
                 <li class="nav-item">
@@ -87,7 +85,6 @@
     <script type="text/javascript">
                 //Opens link to PDB Care to validate molecules
                 function validate(){
-                    swal("Moving to PDB-Care...", "Please ensure that you have saved your 3D molecule as a PDB file in order to validate it", "info");
                     window.open('http://www.glycosciences.de/tools/pdb-care/', '_blank');
                 }
 
@@ -97,7 +94,17 @@
                     //Removes the molecule displayed in the applet.
                     Jmol.script(jmolApplet0, "");
                 }
-
+                
+                //Disables the 'Generate 3D button' when there is no input present.
+                $(document).ready(function(){
+                    $('#submitButton').attr('disabled',true);
+                    $('#args').keyup(function(){
+                        if($(this).val().length !=0)
+                            $('#submitButton').attr('disabled', false);            
+                        else
+                            $('#submitButton').attr('disabled',true);
+                    })
+                });
 
 
                 //Prevents X-Frame-Options Error
@@ -165,13 +172,13 @@
                                     swal("Success", "Molecule was successfully loaded.", "success");
                                 },
                                 error: function (data) {
-                                    swal("Error", "Molecule could not be retrieved. Please try again.\nEnsure that:\n*You added at least one monosaccharide in the 2D workspace.\n*Your molecule contains supported residues.\n*Java or Javascript is enabled in your browser.\n*The server is online.\n", "error");
+                                    swal("Error", "Molecule could not be retrieved. Please try again.\nEnsure that:\n*You added at least one valid monosaccharide in the 2D workspace.\n*Any CASPER notation given does not have errors.\n*Your molecule contains supported residues.\n*Java or Javascript is enabled in your browser.\n*The server is online.\n", "error");
                                 },
                             });                                                        
                         },
                         error: function (XHR, text, errorThrown) {
                             //Throws an error if the post doesn't work
-                            swal("Error", "Molecule could not be retrieved. Please try again.\nEnsure that:\n*You added at least one monosaccharide in the 2D workspace.\n*Your molecule contains supported residues.\n*Java or Javascript is enabled in your browser.\n*The server is online.\n", "error");
+                            swal("Error", "Molecule could not be retrieved. Please try again.\nEnsure that:\n*You added at least one valid monosaccharide in the 2D workspace.\n*Any CASPER notation given does not have errors.\n*Your molecule contains supported residues.\n*Java or Javascript is enabled in your browser.\n*The server is online.\n", "error");
                         }
                     });
 
@@ -192,7 +199,7 @@
                        
                 //Adds dropdown JSmol menu items to Colour Scheme menu
                 $("#cDropdown").html(
-                    Jmol.jmolButton("jmolApplet0", "color group", "Colour by group") +
+                    Jmol.jmolButton("jmolApplet0", "color group", "Colour by residue") +
                     Jmol.jmolButton("jmolApplet0", "color structure", "Colour by structure")+
                     Jmol.jmolButton("jmolApplet0", "color cpk", "Colour by element")
                 );
@@ -207,11 +214,10 @@
 
                 //Adds dropdown JSmol menu items to Colour Scheme menu
                 $("#saveBtns").html(
-                    Jmol.jmolButton("jmolApplet0", "write FILE ?","Save file")+
+                    Jmol.jmolButton("jmolApplet0", "write FILE ?","Save PDB file")+
                     Jmol.jmolButton("jmolApplet0", "write IMAGE jsmol.jpg","Save JPG")+
                     Jmol.jmolButton("jmolApplet0", "write IMAGE jsmol.png","Save PNG")+
                     Jmol.jmolButton("jmolApplet0", "write jsmol.jmol","Save Jmol")+
-                    Jmol.jmolButton("jmolApplet0", "write PNGJ jsmol.png","Save PNG and Jmol")+
                     Jmol.jmolButton("jmolApplet0", "write STATE jsmol.spt","Save state")
                 );
 
@@ -239,8 +245,6 @@
                 x = document.getElementsByName("jmolButton10");
                 x[1].style.display = "none";
                 x = document.getElementsByName("jmolButton11");
-                x[1].style.display = "none";
-                 x = document.getElementsByName("jmolButton12");
                 x[1].style.display = "none";
     </script>
     </div>
