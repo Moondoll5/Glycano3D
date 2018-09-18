@@ -10,6 +10,7 @@ namespace Glycano.Controllers
     public class Data
     {
         public string Value { get; set; }
+        public string Repeats { get; set; }
     }
 
 
@@ -21,10 +22,11 @@ namespace Glycano.Controllers
             return View();
         }
 
+
         [HttpPost]
-        public JsonResult GetValue(Data data)
+        public JsonResult GetData(Data data)
         {
-            //Checks if data was received. If not, error is returned.
+            //Checks if CASPER notation was present in the text field. If not, error is returned.
             if (data.Value == null || data.Value == "")
             {
                 Data error = new Data { Value = "error" };
@@ -36,13 +38,21 @@ namespace Glycano.Controllers
                 ProcessStartInfo start = new ProcessStartInfo();
                 start.FileName = "D:/home/site/wwwroot/CarbBuilder/CarbBuilder2.exe";
 
-                //Gets sessionID unique to current browser.
+                //Gets sessionID unique to current browser request.
                 string sessionId = System.Web.HttpContext.Current.Session.SessionID;
-                Data session = new Data { Value = sessionId };
+                Data session = new Data { Value = sessionId};
 
-                //Local host
-                //start.Arguments = data.Value + " -o /Users/dllima001/source/repos/Gly/Glycano/Data/" + sessionId;
-                start.Arguments = "-i " + data.Value + " -o /home/site/wwwroot/Data/" + sessionId;
+                if (data.Repeats == null || data.Repeats == "")
+                {
+                    // Creates the arguments to give to CarbBuilder
+                    //No repeats were specified
+                    start.Arguments = "-i " + data.Value + " -o /home/site/wwwroot/Data/" + sessionId;
+                }
+                else
+                {
+                    // Creates the arguments to give to CarbBuilder
+                    start.Arguments = "-i " + data.Value + " -r " + data.Repeats + " -o /home/site/wwwroot/Data/" + sessionId;
+                }
 
                 int exitCode;
 
@@ -53,9 +63,14 @@ namespace Glycano.Controllers
                 }
 
                 //Sends sessionID to client
-                //SessionID is used as filename for PDB files.
+                //SessionID is used as a unique filename for PDB files on the server.
                 return Json(session.Value, JsonRequestBehavior.AllowGet);
             }
         }
+
+        //private void RunCarbBuilder()
+        //{
+
+        //}
     }
 }

@@ -24,9 +24,10 @@
 
 </head>
 <body style="position: relative;">
-    <div class="body-content" style="float:right; width: 50%; height: 100%">
+    <div class="body-content" style="width: 100%; height: 100%">
     <!--Main NavBar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="width: 100%">
+        @*Glycano Name*@
         <a class="navbar-brand" href="#">Glycano 3D</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -34,7 +35,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <!-- Button 1 -->
+                    @*Button 1: Colour Scheme dropdown button*@
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-palette"></i> Colour Scheme
@@ -43,7 +44,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <!-- Button 2 -->
+                    @*Button 2: Representations dropdown button*@
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 10px">
                             <i class="fas fa-shapes"></i> Representations
@@ -52,7 +53,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    @*Button 3*@
+                    @*Button 3: Save dropdown button*@
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 10px">
                             <i class="fas fa-save"></i> Save...
@@ -61,7 +62,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    @*Button 4*@
+                    @*Button 4: Validate button*@
                     <div class="btn-group" role="group">
                         <button class="btn btn-primary" type="button" onclick="validate()" style="margin-left: 10px"><i class="far fa-check-circle"></i> Validate</button>
                     </div>
@@ -75,9 +76,9 @@
         <div class="row">
             <div class="col-lg-8">
                 <script>
-                    //Creates the applet and its border.
+                    //Creates the applet and its styling.
                         jmol_isReady = function (applet) {
-                            Jmol._getElement(applet, "appletdiv").style.border = "1px solid grey";
+                            Jmol._getElement(applet, "appletdiv").style.border = "1px solid #212529";
                             Jmol._getElement(applet, "appletdiv").style.margin = "auto";
                             Jmol._getElement(applet, "appletdiv").style.left = "0px";
                             Jmol._getElement(applet, "appletdiv").style. top = "0px";
@@ -104,6 +105,7 @@
                             disableInitialConsole: true,
                         }
 
+                        //Initialises applet and provides the applet with its variables
                         var jmolApplet0 = Jmol.getApplet("jmolApplet0", InfoVar);
                 </script>
             </div>
@@ -111,12 +113,17 @@
                 <!-- Form with text field to input arguments to CarbBuilder -->
                 <form method="POST">
                     <div class="form-group" style="margin-top: 10px">
+                        @*Text area for the user input of CASPER notation*@
                         <label for="args" style="color: white">Type CASPER input here:</label>
                         <textarea name="args" class="form-control" id="args" rows="20" style="max-height: 100%; max-width: 100%;"></textarea>
+                        
+                        @*Text field for user input of the number of repeated structures*@
                         <div class="input-group mb-3" style="margin-top: 10px">
                             <label for="repeats" style="color: white; margin-right: 10px">Number of repeats:</label>
-                            <input id="repeats" type="text" class="form-control" aria-label="number of repeats" aria-describedby="button-addon2" style="width: 50%; float: right">
+                            <input name="repeats" id="repeats" type="text" class="form-control" aria-label="number of repeats" aria-describedby="button-addon2" style="width: 50%; float: right">
                         </div>
+
+                        @*Submit button*@
                         <button class="btn btn-primary" type="submit" id="submitButton"><i class="fas fa-plus"></i> Generate 3D</button>
                     </div>
                 </form>
@@ -130,6 +137,7 @@
                     window.open('http://www.glycosciences.de/tools/pdb-care/', '_blank');
                 }
 
+                //Clears the current molecule from the applet.
                 function clearMol() {
                     window.InfoVar.script = "";
 
@@ -154,51 +162,67 @@
 
                
         
-
+                //On click of submit button, a post request is sent to the HomeController
                 $('#submitButton').click(function (event) {
                     event.preventDefault();
                     //Notifies the user that the molecule is loading
                     swal("Please wait...", "Molecule is loading.", "info");
 
-                    //"->2)aLRha(1->2)aLRha(1->3)aLRha(1->3)bDGlcNAc(1->" -r 6
+                    //The CASPER notation entered by the user
                     var args = $('#args').val();
-                    
-                    var data = { Value: args };
 
+                    //The number of times the structure should be repeated entered by the user.
+                    var repeats = $('#repeats').val();
+
+                    //Creates data object with these values.
+                    var data = {
+                        Value: args,
+                        Repeats: repeats
+                    };
+                    
                     $.ajax({
                         type: "POST",
                         data: "{data:" + JSON.stringify(data) + "}",
-                        url: "/Home/GetValue",
+                        url: "/Home/GetData",
                         contentType: 'application/json; charset:utf-8;',
                         success: function (data) {
-                            //Takes the given session ID filename received from the server
+                            //Data = The session ID filename received from the server
                             //Adds the PDB extension to the filename.
                             window.xxxx = "Data/" + data + ".pdb";
 
                             //Checks if CarbBuilder created the file.
                             //If not, there was an error and error.pdb is returned as the data.
                             $.ajax({
-                                url: 'http://glycano.azurewebsites.net/' + window.xxxx, //or your url
+                                url: 'http://glycano.azurewebsites.net/' + window.xxxx,
                                 success: function (data) {
-                                    //Updates the JSmol script to reload the applet with the new Molecule File.
+                                    //Success: CarbBuilder created the file and the ajax request found the file.
+                                    //Updates the JSmol script to reload the applet with the new carbohydrate model.
+                                    //Default: Molecule is coloured by elements and uses the ball-and-stick representation
                                     window.script = 'load XXXX; spacefill only; spacefill 23%; wireframe 0.15; color cpk;';
+
+                                    //Replaces the XXXX in the script above to be the path to the PDB file.
                                     window.script = window.script.replace(/XXXX/g, window.xxxx);
+
+                                    //Updates JSmol's InfoVar with the new script
                                     window.InfoVar.script = window.script;
+
+                                    //Changes the serverURL
                                     window.InfoVar.serverURL = "http://glycano.azurewebsites.net/";
 
                                     //Changes the molecule displayed in the applet.
                                     Jmol.script(jmolApplet0, window.script);
 
-                                    //Displays once molecule is loaded.
+                                    //Displays once molecule is successfully loaded.
                                     swal("Success", "Molecule was successfully loaded.", "success");
                                 },
                                 error: function (data) {
+                                    //Error: The file wasn't found. CarbBuilder was not able to create the file with the given input.
                                     swal("Error", "Molecule could not be retrieved. Please try again.\nEnsure that:\n*You added at least one valid monosaccharide in the 2D workspace.\n*Any CASPER notation given does not have errors.\n*Your molecule contains supported residues.\n*Java or Javascript is enabled in your browser.\n*The server is online.\n", "error");
                                 },
                             });                                                        
                         },
                         error: function (XHR, text, errorThrown) {
-                            //Throws an error if the post doesn't work
+                            //Throws an error if the post request doesn't work
                             swal("Error", "Molecule could not be retrieved. Please try again.\nEnsure that:\n*You added at least one valid monosaccharide in the 2D workspace.\n*Any CASPER notation given does not have errors.\n*Your molecule contains supported residues.\n*Java or Javascript is enabled in your browser.\n*The server is online.\n", "error");
                         }
                     });
@@ -208,14 +232,14 @@
 
     <script type="text/javascript">
                 //Functions for the JSmol buttons on the HTML
-                function jmolCheckbox(script1, script0, text, ischecked) { Jmol.jmolCheckbox(window.jmolApplet0, script1, script0, text, ischecked) }
+                //Creates jmolButton
                 function jmolButton(script, text) { Jmol.jmolButton(window.jmolApplet0, script, text) }
+                //Creates jmolHtml
                 function jmolHtml(s) { document.write(s) };
-                function jmolBr() { jmolHtml("<br>") }
+                //Creates jmolMenu
                 function jmolMenu(a) { Jmol.jmolMenu(window.jmolApplet0, a) }
               
-                        
-                //Adds button styling
+                //Adds button styling to JSmol buttons
                 Jmol.setButtonCss(null,"style='display: inline;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: inherit;white-space: nowrap;background-color: transparent;border: 0;'");
                        
                 //Adds dropdown JSmol menu items to Colour Scheme menu
