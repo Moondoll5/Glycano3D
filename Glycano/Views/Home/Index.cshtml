@@ -72,60 +72,59 @@
     </nav>
 
     @*Applet Div*@
-    <div class="container" style="width: 100%; height: 450px;">
+    <div class="container-fluid" style="height: 550px;">
         <div class="row">
-            <div class="col-lg-6 col-md-5">
+            <div class="col-md-6">
                 <script>
                     //Creates the applet and its styling.
-                        jmol_isReady = function (applet) {
-                            Jmol._getElement(applet, "appletdiv").style.border = "1px solid #212529";
-                            Jmol._getElement(applet, "appletdiv").style.margin = "auto";
-                            Jmol._getElement(applet, "appletdiv").style.left = "0px";
-                            Jmol._getElement(applet, "appletdiv").style. top = "0px";
-                            Jmol._getElement(applet, "appletdiv").style.position = "absolute";
-                            Jmol._getElement(applet, "appletdiv").style.height = "100%";
-                            Jmol._getElement(applet, "appletdiv").style.display = "block";
-                        }
+                    jmol_isReady = function (applet) {
+                        Jmol._getElement(applet, "appletdiv").style.border = "1px solid #212529";
+                        Jmol._getElement(applet, "appletdiv").style.margin = "auto";
+                        Jmol._getElement(applet, "appletdiv").style.height = "100%";
+                        Jmol._getElement(applet, "appletdiv").style.display = "block";
+                    }
 
-                        //Gives the JSmol specifications
-                        var InfoVar = {
-                            width: 450,
-                            height: 450,
-                            debug: false,
-                            color: "black",
-                            addSelectionOptions: false,
-                            serverURL: "http://glycano.azurewebsites.net/",
-                            use: "HTML5",
-                            jarPath: "Scripts/java",
-                            j2sPath: "Scripts/j2s",
-                            jarFile: "Scripts/java/JmolAppletSigned0.jar",
-                            isSigned: true,
-                            readyFunction: jmol_isReady,
-                            script: "",
-                            disableInitialConsole: true,
-                        }
+                    //Gives the JSmol specifications
+                    var InfoVar = {
+                        width: 550,
+                        height: 550,
+                        debug: false,
+                        color: "black",
+                        addSelectionOptions: false,
+                        serverURL: "http://glycano.azurewebsites.net/",
+                        use: "HTML5",
+                        jarPath: "Scripts/java",
+                        j2sPath: "Scripts/j2s",
+                        jarFile: "Scripts/java/JmolAppletSigned0.jar",
+                        isSigned: true,
+                        readyFunction: jmol_isReady,
+                        script: "",
+                        disableInitialConsole: true,
+                    }
 
-                        //Initialises applet and provides the applet with its variables
-                        var jmolApplet0 = Jmol.getApplet("jmolApplet0", InfoVar);
-                </script>
+                    //Initialises applet and provides the applet with its variables
+                    var jmolApplet0 = Jmol.getApplet("jmolApplet0", InfoVar);
+
+
+                </script>                
             </div>
-            <div class="col-lg-6 col-md-7" style="background-color: #212529; text-align: center;">
-                <!-- Form with text field to input arguments to CarbBuilder -->
-                <form method="POST">
-                    <div class="form-group" style="margin-top: 10px">
+            <div class="col-md-6" style="background-color: #212529;">
+                 @*Form with text field to input arguments to CarbBuilder*@ 
+                <form method="POST" style="width:100%">
                         @*Text area for the user input of CASPER notation*@
-                        <label for="args" style="color: white">Type CASPER input here:</label>
-                        <textarea name="args" class="form-control" id="args" rows="20" style="max-height: 100%; max-width: 100%;"></textarea>
+                        <span>
+                            <label for="args" style="color: white; font-size: 20px">Type CASPER input here:</label>
+                            <textarea name="args" class="form-control" id="args" rows="10" style="max-height: 100%; max-width: 100%;"></textarea>
+                        </span>
                         
                         @*Text field for user input of the number of repeated structures*@
-                        <div class="input-group mb-3" style="margin-top: 10px">
-                            <label for="repeats" style="color: white; margin-right: 10px">Number of repeats:</label>
-                            <input name="repeats" id="repeats" type="text" class="form-control" aria-label="number of repeats" aria-describedby="button-addon2" style="width: 50%; float: right">
+                        <div class="input-group mb-3" style="margin-top: 30px; display:block; width:100%">
+                            <label for="repeats" style="color: white;">Number of repeats:</label>
+                            <input name="repeats" id="repeats" type="text" class="form-control" aria-label="number of repeats" aria-describedby="button-addon2" style="width:100%">
                         </div>
 
                         @*Submit button*@
                         <button class="btn btn-primary" type="submit" id="submitButton"><i class="fas fa-plus"></i> Generate 3D</button>
-                    </div>
                 </form>
             </div>
         </div>
@@ -238,6 +237,8 @@
                 function jmolHtml(s) { document.write(s) };
                 //Creates jmolMenu
                 function jmolMenu(a) { Jmol.jmolMenu(window.jmolApplet0, a) }
+
+                document.getElementById("jmolApplet0_appletinfotablediv").style.width = "100%";
               
                 //Adds button styling to JSmol buttons
                 Jmol.setButtonCss(null,"style='display: inline;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: inherit;white-space: nowrap;background-color: transparent;border: 0;'");
