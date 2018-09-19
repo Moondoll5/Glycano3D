@@ -21,14 +21,13 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script type="text/javascript" src="Scripts/JSmol.min.js"></script>
-
 </head>
-<body style="position: relative;">
+<body style="position: relative; padding-top:20px">
     <div class="body-content" style="width: 100%; height: 100%">
     <!--Main NavBar-->
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="width: 100%">
         @*Glycano Name*@
-        <a class="navbar-brand" href="#">Glycano 3D</a>
+        <a class="navbar-brand" href="#" style="font-size: 20px">Glycano 3D</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -65,6 +64,12 @@
                     @*Button 4: Validate button*@
                     <div class="btn-group" role="group">
                         <button class="btn btn-primary" type="button" onclick="validate()" style="margin-left: 10px"><i class="far fa-check-circle"></i> Validate</button>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    @*Button 5: Help link*@
+                    <div class="btn-group" role="group">
+                        <a href="javascript:help();" style="font-size: 15px; margin-left: 10px; color: white">?</a>
                     </div>
                 </li>
             </ul>
@@ -112,19 +117,19 @@
                  @*Form with text field to input arguments to CarbBuilder*@ 
                 <form method="POST" style="width:100%">
                         @*Text area for the user input of CASPER notation*@
-                        <span>
-                            <label for="args" style="color: white; font-size: 20px">Type CASPER input here:</label>
-                            <textarea name="args" class="form-control" id="args" rows="10" style="max-height: 100%; max-width: 100%;"></textarea>
-                        </span>
+                        <div>
+                            <label for="args" style="color: white; font-size: 12px">Type CASPER input here:</label>
+                            <textarea name="args" class="form-control" id="args" rows="15" style="max-height: 100%; max-width: 100%;"></textarea>
+                        </div>
                         
                         @*Text field for user input of the number of repeated structures*@
-                        <div class="input-group mb-3" style="margin-top: 30px; display:block; width:100%">
-                            <label for="repeats" style="color: white;">Number of repeats:</label>
+                        <div>
+                            <label for="repeats" style="color: white; font-size: 12px; margin-top:30px">Number of repeats:</label>
                             <input name="repeats" id="repeats" type="text" class="form-control" aria-label="number of repeats" aria-describedby="button-addon2" style="width:100%">
                         </div>
-
+                       
                         @*Submit button*@
-                        <button class="btn btn-primary" type="submit" id="submitButton"><i class="fas fa-plus"></i> Generate 3D</button>
+                        <button class="btn btn-primary" type="submit" id="submitButton" style="margin-top: 60px"><i class="fas fa-plus"></i> Generate 3D</button>
                 </form>
             </div>
         </div>
@@ -143,9 +148,15 @@
                     //Removes the molecule displayed in the applet.
                     Jmol.script(jmolApplet0, "");
                 }
+
+                //Triggers a notification with helpful information on how to use the website
+                function help() {
+                    swal("Help", "Please note: Glycano does not work on Mozilla Firefox and Safari web browsers.\n\nControls to manipulate the molecule can be found here:\nhttp://wiki.jmol.org/index.php/Mouse_Manual\n\nCASPER Format examples:\n1. Linear: aDGlc(1->4)aDGlc\n2. Branched: aDMan(1->4)[aDGal(1->6)]aDGlc\n3. Repeating: ->6)aDMan(1->4)aDGlc(1->\n4. Residue with substituents: aDGlc3Ac4OMe\n5. Phosphate linkage: aDMan1P(O->6)aDMan\n6. Linkage from the 2 - postion: aDNeu5Ac(2->6)aDGlc", "info");
+                }
                 
-                //Disables the 'Generate 3D button' when there is no input present.
-                $(document).ready(function(){
+                
+                $(document).ready(function () {
+                    //Disables the 'Generate 3D button' when there is no input present.
                     $('#submitButton').attr('disabled',true);
                     $('#args').keyup(function(){
                         if($(this).val().length !=0)
@@ -216,13 +227,13 @@
                                 },
                                 error: function (data) {
                                     //Error: The file wasn't found. CarbBuilder was not able to create the file with the given input.
-                                    swal("Error", "Molecule could not be retrieved. Please try again.\nEnsure that:\n*You added at least one valid monosaccharide in the 2D workspace.\n*Any CASPER notation given does not have errors.\n*Your molecule contains supported residues.\n*Java or Javascript is enabled in your browser.\n*The server is online.\n", "error");
+                                    swal("Error", "Molecule could not be retrieved. Please try again.\nEnsure that:\n1. You added at least one valid monosaccharide.\n2. Any CASPER notation given does not have errors.\n3. The CASPER notation has no spaces or new lines in the text.\n4. Your molecule contains supported residues.\n5. Java or Javascript is enabled in your browser.\n6. The server is online.\n", "error");
                                 },
                             });                                                        
                         },
                         error: function (XHR, text, errorThrown) {
                             //Throws an error if the post request doesn't work
-                            swal("Error", "Molecule could not be retrieved. Please try again.\nEnsure that:\n*You added at least one valid monosaccharide in the 2D workspace.\n*Any CASPER notation given does not have errors.\n*Your molecule contains supported residues.\n*Java or Javascript is enabled in your browser.\n*The server is online.\n", "error");
+                            swal("Error", "Molecule could not be retrieved. Please try again.\nEnsure that:\n1. You added at least one valid monosaccharide.\n2. Any CASPER notation given does not have errors.\n3. The CASPER notation has no spaces or new lines in the text.\n4. Your molecule contains supported residues.\n5. Java or Javascript is enabled in your browser.\n6. The server is online.\n", "error");
                         }
                     });
 
